@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+  <div class="title">
+    Memento mori: <em>remember that you have to die</em>
+  </div>
+  <div id="datePicker" class="border">
+        <h1 class="flex-item">Enter your date of birth</h1>
+        <input type="date" class="flex-item">
+        <button id="submitButton" class="flex-item">
+          <b>Create Calendar</b>
+        </button>
+  </div> 
+  <a href="https://github.com/100Bandz" class="github-icon" target="_blank" title="https://github.com/100Bandz">
+    <i class="fab fa-github"></i>
+  </a>
+</body>
+</html>
+
+<style>
+.title {
+  font-family: 'Ginga';
+  font-size: 2em;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 5%;
+  color: #000;
+}
+
+.github-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #000;
+  font-size: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.github-icon:hover {
+  transform: scale(1.2);
+}
+
+#datePicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 0.5rem solid #000000;
+  border-radius: 7px;
+  max-width: fit-content;
+  margin: 0 auto;
+  background-color: #1c2331; /* Dark blue */
+}
+
+.flex-item {
+  margin: 10px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+html body {
+  background-color: antiquewhite;
+}
+
+h1 {
+  color:white
+}
+
+</style>
+
+<script>
+const datePicker = document.getElementById('datePicker');
+
+let dateOfBirth;
+
+datePicker.addEventListener('change', (event) => {
+    event.preventDefault(); // prevent form submission
+    dateOfBirth = event.target.value;
+});
+
+const submitButton = document.getElementById('submitButton');
+
+submitButton.addEventListener('click', (event) => {
+  if (dateOfBirth !== undefined) {
+    window.location.href = `calendar.html?dob=${dateOfBirth}`;
+  } else {
+    alert('Please enter a date of birth');
+    return;
+  }
+});
+</script>

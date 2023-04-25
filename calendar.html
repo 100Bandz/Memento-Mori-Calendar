@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.1.1/build/global/luxon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>memento mori</title>
+</head>
+<body>
+  <div class="ging">
+    "You should enjoy the little detours. To the fullest. Because that's where you'll find the 
+    things more important than what you want."
+  </div>
+    <div id="mementoMoriCalendar" class="grid-container"></div>
+    <script>
+        const dobUrlParam = new URLSearchParams(window.location.search).get('dob');
+
+        const dob = luxon.DateTime.fromISO(dobUrlParam);
+
+        const now = luxon.DateTime.local();
+
+        const duration = now.diff(dob, ["weeks", "days"]).toObject();
+
+        const weeksLived = Math.floor(duration.weeks);
+
+        const mementoMoriCalendar = document.getElementById('mementoMoriCalendar');
+
+        const totalWeeks = 80 * 52;
+
+        for (let i = 0; i < totalWeeks; i++) {
+            const gridItem = document.createElement('div');
+            gridItem.classList.add('grid-item');
+            
+            if (i < weeksLived) {
+                gridItem.classList.add('lived');
+            }          
+            mementoMoriCalendar.appendChild(gridItem);
+        }
+    </script>
+      <a href="https://github.com/100Bandz" class="github-icon" target="_blank" title="https://github.com/100Bandz">
+        <i class="fab fa-github"></i>
+      </a>
+</body>
+</html>
+
+
+<style>
+.github-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #000;
+  font-size: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.github-icon:hover {
+  transform: scale(1.2);
+}
+
+.ging {
+  font-family: 'Ginga';
+  font-size: 2em;
+  text-align: center;
+  padding-top: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #000;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  grid-template-rows: repeat(80, 1fr);
+  gap: 2px;
+  padding-top: 2%;
+  padding-left: 36%;
+  padding-right: 36%;
+}
+
+@media only screen and (max-width: 1600px) {
+  .grid-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+.grid-item {
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: #ccc;
+}
+
+.grid-item.lived {
+  background-color:#b41515;
+}
+
+html body {
+  background-color: antiquewhite;
+}
+</style>
