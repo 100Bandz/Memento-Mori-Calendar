@@ -8,38 +8,51 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>memento mori</title>
+    <script>
+      const dobUrlParam = new URLSearchParams(window.location.search).get('dob');
+
+      function checkURLDobParam() {
+        if (!dobUrlParam) {
+          window.location.replace('index.html');
+        }
+      }
+
+      checkURLDobParam();
+    </script>
 </head>
 <body>
   <div class="ging">
     "You should enjoy the little detours. To the fullest. Because that's where you'll find the 
     things more important than what you want."
   </div>
-    <div id="mementoMoriCalendar" class="grid-container"></div>
-    <script>
-        const dobUrlParam = new URLSearchParams(window.location.search).get('dob');
+  <div id="mementoMoriCalendar" class="grid-container"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      const dobUrlParam = new URLSearchParams(window.location.search).get('dob');
 
-        const dob = luxon.DateTime.fromISO(dobUrlParam);
+      const dob = luxon.DateTime.fromISO(dobUrlParam);
 
-        const now = luxon.DateTime.local();
+      const now = luxon.DateTime.local();
 
-        const duration = now.diff(dob, ["weeks", "days"]).toObject();
+      const duration = now.diff(dob, ["weeks", "days"]).toObject();
 
-        const weeksLived = Math.floor(duration.weeks);
+      const weeksLived = Math.floor(duration.weeks);
 
-        const mementoMoriCalendar = document.getElementById('mementoMoriCalendar');
+      const mementoMoriCalendar = document.getElementById('mementoMoriCalendar');
 
-        const totalWeeks = 80 * 52;
+      const totalWeeks = 80 * 52;
 
-        for (let i = 0; i < totalWeeks; i++) {
-            const gridItem = document.createElement('div');
-            gridItem.classList.add('grid-item');
-            
-            if (i < weeksLived) {
-                gridItem.classList.add('lived');
-            }          
-            mementoMoriCalendar.appendChild(gridItem);
-        }
-    </script>
+      for (let i = 0; i < totalWeeks; i++) {
+          const gridItem = document.createElement('div');
+          gridItem.classList.add('grid-item');
+          
+          if (i < weeksLived) {
+              gridItem.classList.add('lived');
+          }          
+          mementoMoriCalendar.appendChild(gridItem);
+      }
+    });
+  </script>
       <a href="https://github.com/100Bandz" class="github-icon" target="_blank" title="https://github.com/100Bandz">
         <i class="fab fa-github"></i>
       </a>
